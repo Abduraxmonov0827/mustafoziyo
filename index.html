@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title id="doc-title">Al Arda Avenue Hotel — Toshkent</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="al_arda_avenue_hotel.css" />
+  </head>
+  <body>
+    <div class="lightbox" id="lightbox">
+      <button
+        type="button"
+        class="lightbox-close"
+        data-i18n-aria="aria.close"
+        aria-label="Yopish"
+      >
+        ✕
+      </button>
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <nav id="navbar">
+      <a href="#" class="nav-logo-wrap">
+        <svg
+          class="nav-favicon"
+          viewBox="0 0 64 64"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="64" height="64" fill="#0D0D0D" />
+          <polygon
+            points="32,4 60,32 32,60 4,32"
+            fill="none"
+            stroke="#C9A84C"
+            stroke-width="2"
+          />
+          <polygon
+            points="32,12 52,32 32,52 12,32"
+            fill="none"
+            stroke="#C9A84C"
+            stroke-width="0.8"
+            opacity="0.4"
+          />
+          <text
+            x="32"
+            y="38"
+            font-family="Georgia,serif"
+            font-size="20"
+            fill="#C9A84C"
+            text-anchor="middle"
+            letter-spacing="1"
+          >
+            AA
+          </text>
+        </svg>
+        <span class="nav-logo">Al Arda Avenue</span>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#gallery" data-i18n="nav.gallery">Galereya</a></li>
+          <li><a href="#rooms" data-i18n="nav.rooms">Xonalar</a></li>
+          <li><a href="#amenities" data-i18n="nav.amenities">Xizmatlar</a></li>
+          <li><a href="#reviews" data-i18n="nav.reviews">Sharhlar</a></li>
+          <li><a href="#location" data-i18n="nav.location">Manzil</a></li>
+          <li><a href="#booking" data-i18n="nav.booking">Bron qilish</a></li>
+        </ul>
+        <div
+          class="lang-switch"
+          id="lang-switch"
+          role="group"
+          data-i18n-aria="aria.langGroup"
+          aria-label="Tilni tanlash"
+        >
+          <button
+            type="button"
+            class="lang-btn lang-btn--active"
+            data-set-lang="uz"
+            aria-pressed="true"
+          >
+            UZ
+          </button>
+          <button type="button" class="lang-btn" data-set-lang="ru" aria-pressed="false">
+            RU
+          </button>
+          <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">
+            EN
+          </button>
+        </div>
+        <button
+          type="button"
+          class="nav-toggle"
+          id="nav-toggle"
+          data-i18n-aria="aria.menu"
+          aria-label="Menyu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+    <section class="hero">
+      <img
+        class="hero-img"
+        src="https://alardaavenue.uz/img/8463aa6b25b33f2d.webp"
+        alt=""
+        data-i18n-alt="hero.imgAlt"
+      />
+      <div class="hero-overlay"></div>
+      <div class="hero-pattern"></div>
+      <div class="hero-content">
+        <p class="hero-label" data-i18n="hero.label">Toshkent, O'zbekiston</p>
+        <h1 class="hero-title" data-i18n-html="hero.title">
+          Al Arda<br /><em>Avenue Hotel</em>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Markaziy shahar qalbida qulaylik va nafosatning uyg'unligi
+        </p>
+        <a href="#booking" class="hero-cta"
+          ><span data-i18n="hero.cta">Xona bron qilish</span></a
+        >
+      </div>
+      <div class="hero-scroll" data-i18n="hero.scroll">Pastga</div>
+    </section>
+    <div class="stats">
+      <div class="stat" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-num">3.9</div>
+        <div class="stat-label" data-i18n="stats.rate">Mijozlar bahosi</div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-num">175+</div>
+        <div class="stat-label" data-i18n="stats.reviews">Sharhlar</div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label" data-i18n="stats.service24">Xizmat ko'rsatish</div>
+      </div>
+      <div class="stat" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-num">5★</div>
+        <div class="stat-label" data-i18n="stats.hospitality">Mehmondo'stlik</div>
+      </div>
+    </div>
+    <section class="gallery" id="gallery">
+      <div data-aos="fade-right">
+        <p class="section-label" data-i18n="gl.label">Rasmlar</p>
+        <h2 class="section-title" data-i18n-html="gl.title">
+          Mehmonxona <em>galereyasi</em>
+        </h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery-grid">
+        <div
+          class="gallery-item large"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="fade-right"
+          data-aos-duration="900"
+        >
+          <img
+            src="https://alardaavenue.uz/img/09142b3f8d0c5ce8.webp"
+            alt=""
+            data-i18n-alt="gl.alt1"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+        <div
+          class="gallery-item"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="fade-left"
+          data-aos-delay="100"
+        >
+          <img
+            src="https://alardaavenue.uz/img/465bd82eed745143.webp"
+            alt=""
+            data-i18n-alt="gl.alt2"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+        <div
+          class="gallery-item"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="fade-left"
+          data-aos-delay="200"
+        >
+          <img
+            src="https://alardaavenue.uz/img/10047463ca8002fc.webp"
+            alt=""
+            data-i18n-alt="gl.alt3"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+        <div
+          class="gallery-item"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="zoom-in"
+          data-aos-delay="0"
+        >
+          <img
+            src="https://alardaavenue.uz/img/21aaa8cbc99325bb.webp"
+            alt=""
+            data-i18n-alt="gl.alt4"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+        <div
+          class="gallery-item"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="zoom-in"
+          data-aos-delay="100"
+        >
+          <img
+            src="https://alardaavenue.uz/img/146380a8b0ceee6f.webp"
+            alt=""
+            data-i18n-alt="gl.alt5"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+        <div
+          class="gallery-item"
+          role="button"
+          tabindex="0"
+          data-i18n-aria="aria.openGallery"
+          aria-label="Rasmni kattalashtirish"
+          data-aos="zoom-in"
+          data-aos-delay="200"
+        >
+          <img
+            src="https://alardaavenue.uz/img/5f27ccb7a72f720d.webp"
+            alt=""
+            data-i18n-alt="gl.alt6"
+          />
+          <div class="gallery-item-overlay">
+            <span class="gallery-zoom">🔍</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-sep"></div>
+    <section class="about" id="about">
+      <div class="about-inner">
+        <div>
+          <p class="section-label" data-aos="fade-right" data-i18n="about.label">
+            Mehmonxona haqida
+          </p>
+          <h2
+            class="section-title"
+            data-aos="fade-right"
+            data-aos-delay="100"
+            data-i18n-html="about.title"
+          >
+            Toshkent qalbida <em>uy hissiyoti</em>
+          </h2>
+          <div class="divider" data-aos="fade-right" data-aos-delay="200"></div>
+          <div
+            class="about-text line-reveal"
+            data-aos="fade-right"
+            data-aos-delay="250"
+          >
+            <p data-i18n="about.p1">
+              Al Arda Avenue Hotel — Toshkentning markaziy qismida, qulay
+              manzilda joylashgan zamonaviy mehmonxona. Shahardagi eng yirik
+              diqqatga sazovor joylarga bir soat yetib borish imkoniyati mavjud.
+            </p>
+            <p data-i18n="about.p2">
+              Mehmonxonamiz mehmonlarga issiq va qulay muhit taqdim etadi.
+              Xodimlarimiz sizni o'z uying kabi his qilishingiz uchun har doim
+              tayyor.
+            </p>
+            <p data-i18n="about.p3">
+              Transfer xizmati — temir yo'l bekatidan SUV avtomobillarda qulay
+              tashish imkoniyati mavjud.
+            </p>
+            <div class="stars">★★★★☆</div>
+          </div>
+        </div>
+        <div
+          class="about-img-wrap"
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
+          <img
+            class="about-main-img"
+            src="https://alardaavenue.uz/img/1940085cc39defaf.webp"
+            alt=""
+            data-i18n-alt="about.imgAlt"
+          />
+          <div class="about-badge" data-aos="zoom-in" data-aos-delay="400">
+            <div class="about-badge-num">A+</div>
+            <div class="about-badge-text" data-i18n="about.badge">Xizmat sifati</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-sep"></div>
+    <section class="rooms" id="rooms">
+      <div class="rooms-header">
+        <div>
+          <p class="section-label" data-aos="fade-up" data-i18n="rooms.label">
+            Turar joylar
+          </p>
+          <h2
+            class="section-title"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-i18n-html="rooms.title"
+          >
+            Qulay va <em>shinam xonalar</em>
+          </h2>
+        </div>
+      </div>
+      <div class="rooms-grid">
+        <div class="room-card" data-aos="fade-up" data-aos-delay="0">
+          <img
+            class="room-img"
+            src="https://alardaavenue.uz/img/1940085cc39defaf.webp"
+            alt="Single Room"
+          />
+          <div class="room-info">
+            <h3 class="room-name" data-i18n="room1.name">Standart yagona xona</h3>
+            <p class="room-desc" data-i18n="room1.desc">
+              Qulay yotoq, konditsioner, iliq suv, WiFi. Dam olish uchun barcha
+              zarur qulayliklar.
+            </p>
+            <div class="room-price">
+              $35 <span data-i18n="rooms.perNight">/ kecha</span>
+            </div>
+          </div>
+          <div class="room-overlay"></div>
+        </div>
+        <div class="room-card" data-aos="fade-up" data-aos-delay="150">
+          <img
+            class="room-img"
+            src="https://alardaavenue.uz/img/4310301826418918.webp"
+            alt="Twin Room"
+          />
+          <div class="room-info">
+            <h3 class="room-name" data-i18n="room2.name">Ikki yotoqli xona</h3>
+            <p class="room-desc" data-i18n="room2.desc">
+              Ikkita alohida yotoq, zamonaviy hammom, premium yotoq va
+              kengaytirilgan xizmatlar.
+            </p>
+            <div class="room-price">
+              $55 <span data-i18n="rooms.perNight">/ kecha</span>
+            </div>
+          </div>
+          <div class="room-overlay"></div>
+        </div>
+        <div class="room-card" data-aos="fade-up" data-aos-delay="300">
+          <img
+            class="room-img"
+            src="https://alardaavenue.uz/img/d118cb07a4fdb92a.webp"
+            alt="Triple Room"
+          />
+          <div class="room-info">
+            <h3 class="room-name" data-i18n="room3.name">Uchta yotoqli xona</h3>
+            <p class="room-desc" data-i18n="room3.desc">
+              Uch kishiga mo'ljallangan keng xona, oila yoki guruh sayohati
+              uchun ideal.
+            </p>
+            <div class="room-price">
+              $75 <span data-i18n="rooms.perNight">/ kecha</span>
+            </div>
+          </div>
+          <div class="room-overlay"></div>
+        </div>
+      </div>
+    </section>
+    <section class="amenities" id="amenities">
+      <p class="section-label" data-aos="fade-up" data-i18n="am.label">Xizmatlar</p>
+      <h2
+        class="section-title"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-i18n-html="am.title"
+      >
+        Qulaylik uchun <em>hamma narsa</em>
+      </h2>
+      <div class="amenities-grid">
+        <div class="amenity" data-aos="flip-left" data-aos-delay="0">
+          <div class="amenity-icon">🍳</div>
+          <div class="amenity-name" data-i18n="am1.name">Nonushta</div>
+          <div class="amenity-desc" data-i18n="am1.desc">
+            Har kuni 8:00–10:00 mazali ertalabki ovqat
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="80">
+          <div class="amenity-icon">📶</div>
+          <div class="amenity-name" data-i18n="am2.name">Bepul Wi-Fi</div>
+          <div class="amenity-desc" data-i18n="am2.desc">
+            Tezkor internet barcha xonalarda
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="160">
+          <div class="amenity-icon">🏊</div>
+          <div class="amenity-name" data-i18n="am3.name">Basseyn</div>
+          <div class="amenity-desc" data-i18n="am3.desc">
+            Ichki basseyn — dam olish imkoniyati
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="240">
+          <div class="amenity-icon">🚗</div>
+          <div class="amenity-name" data-i18n="am4.name">Transfer</div>
+          <div class="amenity-desc" data-i18n="am4.desc">
+            Bekat va aeroport transfer xizmati
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="0">
+          <div class="amenity-icon">❄️</div>
+          <div class="amenity-name" data-i18n="am5.name">Konditsioner</div>
+          <div class="amenity-desc" data-i18n="am5.desc">
+            Har bir xonada yangi konditsioner tizimi
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="80">
+          <div class="amenity-icon">🅿️</div>
+          <div class="amenity-name" data-i18n="am6.name">Bepul parking</div>
+          <div class="amenity-desc" data-i18n="am6.desc">
+            Mehmonlar uchun bepul avtoturar joy
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="160">
+          <div class="amenity-icon">🍽</div>
+          <div class="amenity-name" data-i18n="am7.name">Restoran</div>
+          <div class="amenity-desc" data-i18n="am7.desc">
+            O'zbek va xalqaro taomlari
+          </div>
+        </div>
+        <div class="amenity" data-aos="flip-left" data-aos-delay="240">
+          <div class="amenity-icon">🧹</div>
+          <div class="amenity-name" data-i18n="am8.name">Uy xizmati</div>
+          <div class="amenity-desc" data-i18n="am8.desc">Kundalik xona tozalash</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-sep"></div>
+    <section class="services-section">
+      <p class="section-label" data-aos="fade-up" data-i18n="srv.label">
+        Taom va dam olish
+      </p>
+      <h2
+        class="section-title"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-i18n-html="srv.title"
+      >
+        Mazali <em>nonushta</em>
+      </h2>
+      <div class="divider" data-aos="fade-up" data-aos-delay="150"></div>
+      <div class="services-inner">
+        <img
+          class="services-img"
+          src="https://alardaavenue.uz/img/5f27ccb7a72f720d.webp"
+          alt=""
+          data-i18n-alt="srv.imgAlt"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        />
+        <div class="service-list">
+          <div class="service-item" data-aos="fade-left" data-aos-delay="0">
+            <div class="service-icon">🍽</div>
+            <div>
+              <div class="service-name" data-i18n="srv1.name">Bufet nonushta</div>
+              <div class="service-desc" data-i18n="srv1.desc">
+                Al Arda Avenue mehmonxonasidagi nonushta — butun kun uchun
+                kayfiyat yaratuvchi haqiqiy gastronomik zavq.
+              </div>
+            </div>
+          </div>
+          <div class="service-item" data-aos="fade-left" data-aos-delay="100">
+            <div class="service-icon">🏊</div>
+            <div>
+              <div class="service-name" data-i18n="srv2.name">Ichki basseyn</div>
+              <div class="service-desc" data-i18n="srv2.desc">
+                Mehmonlar uchun ichki basseyn mavjud. Dam olish va suzish
+                imkoniyati yil davomida.
+              </div>
+            </div>
+          </div>
+          <div class="service-item" data-aos="fade-left" data-aos-delay="200">
+            <div class="service-icon">🎾</div>
+            <div>
+              <div class="service-name" data-i18n="srv3.name">
+                Sport imkoniyatlari
+              </div>
+              <div class="service-desc" data-i18n="srv3.desc">
+                Tennis, velosiped haydash va stol tennis — faol dam olishni
+                yoqtiradigan mehmonlar uchun.
+              </div>
+            </div>
+          </div>
+          <div class="service-item" data-aos="fade-left" data-aos-delay="300">
+            <div class="service-icon">🗺</div>
+            <div>
+              <div class="service-name" data-i18n="srv4.name">
+                Ekskursiya yordami
+              </div>
+              <div class="service-desc" data-i18n="srv4.desc">
+                Toshkent va O'zbekiston bo'ylab ekskursiyalarni tashkil etishda
+                yordam beramiz.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="reviews" id="reviews">
+      <p class="section-label" data-aos="fade-up" data-i18n="rev.label">
+        Mehmon fikrlari
+      </p>
+      <h2
+        class="section-title"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-i18n-html="rev.title"
+      >
+        Mijozlarimiz <em>nima deydi</em>
+      </h2>
+      <div class="reviews-grid">
+        <div class="review-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text" data-i18n="rev1.text">
+            Juda yaxshi va tartibli xonalar. Nonushta ham zo'r edi. Mezbonlar
+            juda mehribon va ochiq ko'ngilli edi.
+          </p>
+          <div class="review-author" data-i18n="rev1.author">Xorijiy mehmon</div>
+        </div>
+        <div class="review-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text" data-i18n="rev2.text">
+            Joylashuv juda yaxshi, nonushta super mazali. Xodimlar ko'p tilda
+            gaplashadi. Sanjar va Mirzo akalar zo'r!
+          </p>
+          <div class="review-author" data-i18n="rev2.author">Hindiston sayyohi</div>
+        </div>
+        <div class="review-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text" data-i18n="rev3.text">
+            Markaziy Toshkentdan unchalik uzoq emas, tinch mehmonxona. Asila
+            juda yordamchi edi.
+          </p>
+          <div class="review-author" data-i18n="rev3.author">Britaniyalik sayyoh</div>
+        </div>
+        <div class="review-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text" data-i18n="rev4.text">
+            Temir yo'l bekatidan transfer ajoyib edi. Xonalar yangi va toza.
+            Yana kelamiz!
+          </p>
+          <div class="review-author" data-i18n="rev4.author">AQSh sayyohi</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-sep"></div>
+    <section class="location" id="location">
+      <p class="section-label" data-aos="fade-up" data-i18n="loc.label">Manzil</p>
+      <h2
+        class="section-title"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        data-i18n-html="loc.title"
+      >
+        Bizni <em>topish oson</em>
+      </h2>
+      <div class="location-inner">
+        <div class="location-info">
+          <div
+            class="location-address"
+            data-aos="fade-right"
+            data-i18n-html="loc.address"
+          >
+            <strong>Manzil:</strong> Katta Mirobod ko'chasi, 59A,<br />Yakkasaroy
+            tumani, 100070<br />Toshkent, O'zbekiston
+          </div>
+          <div class="contact-item" data-aos="fade-right" data-aos-delay="100">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label" data-i18n="loc.phone">Telefon</div>
+              <div class="contact-text">
+                <a class="contact-link" href="tel:+998917714455">+998 91 771 44 55</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item" data-aos="fade-right" data-aos-delay="180">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-label" data-i18n="loc.manager">Menejer (24/7)</div>
+              <div class="contact-text">
+                <a class="contact-link" href="tel:+998957300308">+998 95 730 03 08</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item" data-aos="fade-right" data-aos-delay="260">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label" data-i18n="loc.email">Email</div>
+              <div class="contact-text">
+                <a class="contact-link" href="mailto:shoshavenue@gmail.com"
+                  >shoshavenue@gmail.com</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="contact-item" data-aos="fade-right" data-aos-delay="340">
+            <div class="contact-icon">⏰</div>
+            <div>
+              <div class="contact-label" data-i18n="loc.timesLabel">
+                Kirish / chiqish
+              </div>
+              <div class="contact-text" data-i18n="loc.times">
+                Kirish: 14:00 | Chiqish: 12:00
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="location-map-col" data-aos="fade-left" data-aos-duration="900">
+          <div class="map-yandex-wrap">
+            <p class="map-caption" data-i18n="loc.mapArea">Katta Mirobod, Toshkent</p>
+            <div class="map-yandex-frame">
+              <iframe
+                src="https://yandex.uz/map-widget/v1/?ll=69.264102%2C41.288281&amp;mode=search&amp;oid=69501094668&amp;ol=biz&amp;z=14.77"
+                title="Al Arda Avenue — xarita"
+                data-i18n-title="loc.mapIframeTitle"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <a
+              href="https://yandex.uz/maps/org/al_arda_avenue/69501094668/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="map-link"
+              data-i18n="loc.mapLink"
+              >Yandex xaritada ochish</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="booking" id="booking">
+      <h2 class="booking-title" data-aos="fade-up" data-i18n-html="bk.title">
+        Xonangizni hoziroq<br /><em>bron qiling</em>
+      </h2>
+      <p class="booking-sub" data-aos="fade-up" data-aos-delay="100" data-i18n="bk.sub">
+        Qulay narxlar · Tezkor tasdiq · Bepul bekor qilish
+      </p>
+      <div class="booking-form" data-aos="zoom-in" data-aos-delay="200">
+        <div class="booking-card">
+          <div class="booking-row">
+            <label class="booking-label" for="bk-checkin" data-i18n="bk.checkin"
+              >Kelish sanasi</label
+            >
+            <input
+              class="booking-input"
+              id="bk-checkin"
+              name="checkin"
+              type="date"
+              autocomplete="off"
+            />
+          </div>
+          <div class="booking-row">
+            <label class="booking-label" for="bk-checkout" data-i18n="bk.checkout"
+              >Ketish sanasi</label
+            >
+            <input
+              class="booking-input"
+              id="bk-checkout"
+              name="checkout"
+              type="date"
+              autocomplete="off"
+            />
+          </div>
+          <div class="booking-row">
+            <label class="booking-label" for="bk-guests" data-i18n="bk.guests"
+              >Mehmonlar soni</label
+            >
+            <input
+              class="booking-input"
+              id="bk-guests"
+              name="guests"
+              type="number"
+              min="1"
+              max="20"
+              data-i18n-placeholder="bk.guestsPh"
+              placeholder="Masalan 2"
+              inputmode="numeric"
+            />
+          </div>
+          <div class="booking-row">
+            <label class="booking-label" for="bk-room" data-i18n="bk.room"
+              >Xona turi</label
+            >
+            <select
+              class="booking-input booking-select"
+              id="bk-room"
+              name="room"
+            >
+              <option value="" data-i18n="bk.room0">Tanlang</option>
+              <option value="standart-yagona" data-i18n="bk.room1">
+                Standart yagona xona
+              </option>
+              <option value="ikki-yotoqli" data-i18n="bk.room2">
+                Ikki yotoqli xona
+              </option>
+              <option value="uchta-yotoqli" data-i18n="bk.room3">
+                Uchta yotoqli xona
+              </option>
+            </select>
+          </div>
+          <div class="booking-row booking-row--promo">
+            <label class="booking-label" for="bk-promo">
+              <span data-i18n="bk.promo">Promo-kod</span>
+              <span class="booking-label-hint" data-i18n="bk.promoHint"
+                >ixtiyoriy</span
+              >
+            </label>
+            <input
+              class="booking-input"
+              id="bk-promo"
+              name="promo"
+              type="text"
+              maxlength="40"
+              autocomplete="off"
+              data-i18n-placeholder="bk.promoPh"
+              placeholder="Agar promo-kodingiz bo'lsa"
+              spellcheck="false"
+            />
+          </div>
+          <button type="button" class="booking-submit" data-i18n="bk.submit">
+            Bron qilish
+          </button>
+        </div>
+      </div>
+      <p class="booking-phone" data-aos="fade-up" data-aos-delay="300">
+        <span data-i18n="bk.orCall">Yoki qo'ng'iroq qiling:</span>
+        <a href="tel:+998917714455">+998 91 771 44 55</a>
+      </p>
+      <p class="booking-telegram-wrap" data-aos="fade-up" data-aos-delay="350">
+        <a
+          href="https://t.me/alardaavenuehotel_bot"
+          class="booking-telegram"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n="bk.telegram"
+          >Telegram orqali bron</a
+        >
+      </p>
+    </section>
+    <footer>
+      <div class="footer-inner">
+      <div class="footer-brand">
+        <svg
+          class="footer-favicon"
+          viewBox="0 0 64 64"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="64" height="64" fill="#0D0D0D" />
+          <polygon
+            points="32,4 60,32 32,60 4,32"
+            fill="none"
+            stroke="#C9A84C"
+            stroke-width="2"
+          />
+          <polygon
+            points="32,12 52,32 32,52 12,32"
+            fill="none"
+            stroke="#C9A84C"
+            stroke-width="0.8"
+            opacity="0.4"
+          />
+          <text
+            x="32"
+            y="38"
+            font-family="Georgia,serif"
+            font-size="20"
+            fill="#C9A84C"
+            text-anchor="middle"
+            letter-spacing="1"
+          >
+            AA
+          </text>
+        </svg>
+        <span class="footer-logo">Al Arda Avenue</span>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">
+        © 2026 Al Arda Avenue Hotel. Toshkent, O'zbekiston.
+      </p>
+      <ul class="footer-links">
+        <li><a href="#gallery" data-i18n="nav.gallery">Galereya</a></li>
+        <li><a href="#rooms" data-i18n="nav.rooms">Xonalar</a></li>
+        <li><a href="#booking" data-i18n="footer.shortBook">Bron</a></li>
+      </ul>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="al_arda_avenue_hotel.i18n.js"></script>
+    <script src="al_arda_avenue_hotel.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+# Render Blueprint — bot uchun fon ishchisi (HTTP kerak emas).
+# https://render.com/docs/blueprint-spec
+services:
+  - type: worker
+    name: al-arda-booking-bot
+    runtime: node
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "lts"
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: BOOKING_NOTIFY_CHAT_IDS
+        sync: false
