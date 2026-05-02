@@ -1,6 +1,30 @@
 # Al Arda Avenue — landing va Telegram bron boti
 
-Statik mehmonxona sahifasi (`al_arda_avenue_hotel_aos.html`, CSS/JS, uch til) va Node.js (`telegraf`) orqali ishlaydigan bron boti.
+Statik mehmonxona sahifasi (`index.html`, CSS/JS, uch til) va Node.js (`telegraf`) orqali ishlaydigan bron boti.
+
+## Bepul rejim (tavsiya etiladi)
+
+| Qism | Bepul bo‘lishi | Izoh |
+|------|----------------|------|
+| Landing sahifa | Ha | Netlify / GitHub Pages / boshqa statik hosting |
+| Veb forma → Telegram xabar | Ha | Netlify **Functions** (`booking-notify`) + token / chat ID |
+| **Suhbatli** bot (`/start`, bosqichma-bosqich bron) | Doimiy server kerak | **Render Worker** ko‘pincha **pullik** yoki kartani talab qiladi; «faqat bepul» uchun quyidagi variantlar |
+
+**Botni $0 bilan ishga tushirish:**
+
+1. **O‘z kompyuteringiz / uy serveringiz** — `npm start`; mashina yoqiq va internetda turishi kerak (eng sodda).
+2. **Oracle Cloud Always Free** (VM) — doimiy bepul kapasitet; ichida Docker yoki to‘g‘ridan-to‘g‘ri Node: [Oracle Free Tier](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic.htm).
+3. **Har qanday VPS** da Docker: [`Dockerfile`](Dockerfile) bilan image yarating, `-e TELEGRAM_BOT_TOKEN=... -e BOOKING_NOTIFY_CHAT_IDS=...` bering.
+
+```bash
+docker build -t al-arda-bot .
+docker run --restart unless-stopped \
+  -e TELEGRAM_BOT_TOKEN="BOT_TOKENINGIZ" \
+  -e BOOKING_NOTIFY_CHAT_IDS="CHAT_ID1,CHAT_ID2" \
+  al-arda-bot
+```
+
+Agar faqat **saytdan kelgan bronlar** Telegramga yetarli bo‘lsa, botni umuman bulutda ishlatmasangiz ham bo‘ladi — Netlify `booking-notify` xabarni yuboradi.
 
 ## Maxfiy ma’lumotlar
 
@@ -22,19 +46,17 @@ npm start
 
 (PowerShell da `copy`; macOS/Linux da `cp env.example .env`.)
 
-## Render ga botni chiqarish
+## Render (ixtiyoriy, ko‘pincha pullik)
 
-[`render.yaml`](render.yaml) repository ildizida — Background **Worker** sifatida ishga tushadi (sayt bilan birga GitHub ga push qiling).
+[`render.yaml`](render.yaml) — Background **Worker**. Ko‘pchilik akkauntlarda **karta qo‘shish** talab qilinadi; Worker bepul deb kafolatlanmaydi ([narxlar](https://render.com/pricing)).
 
 1. Kodni GitHub ga push qiling.
-2. [Render](https://render.com) ga kiring → **New +** → **Blueprint** → repository ni ulang yoki **New +** → **Background Worker**.
-3. Agar Worker ni qo‘lda yasasangiz: **Root Directory** bo‘sh qoldiring, **Build Command** `npm install`, **Start Command** `npm start`.
-4. **Environment** da o‘zgaruvchilarni qo‘shing (`.env` Renderda ishlamaydi):
-   - `TELEGRAM_BOT_TOKEN` — BotFather dan token (majburiy).
-   - `BOOKING_NOTIFY_CHAT_IDS` — admin / guruh chat ID lar, vergul bilan (ixtiyoriy); bo‘lmasa bron xabarlari faqat logga yoziladi.
-5. **Deploy** — logda `✓ Bot ishlamoqda` chiqishi kerak.
+2. [Render](https://render.com) → **New +** → **Blueprint** yoki **Background Worker**.
+3. **Build:** `npm install` · **Start:** `npm start`
+4. **Environment:** `TELEGRAM_BOT_TOKEN`, `BOOKING_NOTIFY_CHAT_IDS`
+5. Logda `✓ Bot ishlamoqda`.
 
-Eslatma: Renderda **Worker** odatda **to‘lov rejasiga** kiradi (tekshiring: [render.com/pricing](https://render.com/pricing)); bepul Web Service uyqu rejimida bot uchun mos emas.
+**Bepul Web Service** uyqu rejimida uzilib qoladi — polling bot uchun mos emas.
 
 ## Netlify: sahifa va veb bron bildirishnomalari
 
