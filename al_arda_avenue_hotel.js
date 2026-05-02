@@ -172,7 +172,33 @@ bkCheckin?.addEventListener("change", () => {
   if (bkCheckout.value && bkCheckout.value <= bkCheckin.value) bkCheckout.value = "";
 });
 
-document.querySelector(".booking-submit")?.addEventListener("click", () => {
+function bookingNotifyUrl() {
+  const fromDom = document.documentElement.getAttribute(
+    "data-booking-notify-url",
+  );
+  if (fromDom?.trim()) return fromDom.trim();
+  return "/.netlify/functions/booking-notify";
+}
+
+async function sendBookingNotify(payload) {
+  const url = bookingNotifyUrl();
+  const ctrl = new AbortController();
+  const timer = window.setTimeout(() => ctrl.abort(), 12000);
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: ctrl.signal,
+    });
+  } catch {
+    /* Netlify funktsiyasi yo‘q yoki tarmoq — sahifa baribir ochiladi */
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
+document.querySelector(".booking-submit")?.addEventListener("click", async () => {
   const checkin = bkCheckin?.value ?? "";
   const checkout = bkCheckout?.value ?? "";
   if (checkin && checkout && checkout <= checkin) {
@@ -182,12 +208,25 @@ document.querySelector(".booking-submit")?.addEventListener("click", () => {
     return;
   }
 
+  const guests = bkGuests?.value?.trim() ?? "";
+  const room = bkRoom?.value ?? "";
+  const sel = bkRoom?.selectedOptions?.[0];
+  const roomLabel = sel?.textContent?.trim() ?? "";
+
+  await sendBookingNotify({
+    check_in: checkin || null,
+    check_out: checkout || null,
+    guests: guests || null,
+    room_type: room || null,
+    room_label: roomLabel || null,
+    promo: (bkPromo?.value ?? "").trim() || null,
+    source: "website",
+  });
+
   const params = new URLSearchParams();
   if (checkin) params.set("check_in", checkin);
   if (checkout) params.set("check_out", checkout);
-  const guests = bkGuests?.value?.trim();
   if (guests) params.set("guests", guests);
-  const room = bkRoom?.value;
   if (room) params.set("room_type", room);
   const promo = bkPromo?.value?.trim();
   if (promo) params.set("promo", promo);

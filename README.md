@@ -36,9 +36,23 @@ npm start
 
 Eslatma: Renderda **Worker** odatda **to‘lov rejasiga** kiradi (tekshiring: [render.com/pricing](https://render.com/pricing)); bepul Web Service uyqu rejimida bot uchun mos emas.
 
+## Netlify: sahifa va veb bron bildirishnomalari
+
+Landing **Netlify** da turganida «Bron qilish» bosilganda forma Telegramga (`booking-notify` serverless funktsiyasi orqali) xabar yuboradi — **shu bot token** va **shu admin chat ID** lar ishlatiladi.
+
+1. Saytni Netlify ga ulang ([`netlify.toml`](netlify.toml) loyiha ildizida).
+2. **Site settings → Environment variables** ga qo‘shing:
+   - `TELEGRAM_BOT_TOKEN` — BotFather token (Render dagi bilan bir xil bo‘lishi mumkin).
+   - `BOOKING_NOTIFY_CHAT_IDS` — bron xabarlarini oladigan chat ID lar (vergul bilan).
+3. Redeploy qiling.
+
+Chat ID ni bilish: bot bilan `/start` yozgan odam uchun `@userinfobot` yoki bot kodida `console.log(ctx.chat.id)` (vaqtinchalik).
+
+**Boshqa hosting** (faqat statik fayl): funktsiya ishlamaydi — `fetch` xatolikni yutadi va faqat eski kabi veb-bron sahifasi ochiladi. Funktsiya kerak bo‘lsa Netlify ishlating yoki alohida API yozing.
+
 ## Sahifani ochish
 
-Brauzerda `al_arda_avenue_hotel_aos.html` ni oching yoki fayllarni har qanday static hostingga (GitHub Pages, Netlify va h.k.) yuklang.
+Brauzerda `index.html` ni oching yoki loyiha ildizini static hostingda (`publish = "."`) chiqaring.
 
 ## GitHub ga yuklash
 
