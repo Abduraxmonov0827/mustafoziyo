@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
-COPY telegram_booking_bot.js ./
+COPY telegram_booking_bot.js telegram_bot_logic.mjs ./
 
 ENV NODE_ENV=production
 CMD ["node", "telegram_booking_bot.js"]

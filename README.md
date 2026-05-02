@@ -8,7 +8,7 @@ Statik mehmonxona sahifasi (`index.html`, CSS/JS, uch til) va Node.js (`telegraf
 |------|----------------|------|
 | Landing sahifa | Ha | Netlify / GitHub Pages / boshqa statik hosting |
 | Veb forma → Telegram xabar | Ha | Netlify **Functions** (`booking-notify`) + token / chat ID |
-| **Suhbatli** bot (`/start`, bosqichma-bosqich bron) | Doimiy server kerak | **Render Worker** ko‘pincha **pullik** yoki kartani talab qiladi; «faqat bepul» uchun quyidagi variantlar |
+| **Suhbatli** bot (`/start`, bosqichma-bosqich bron) | Netlify **webhook** + [Upstash Redis](https://upstash.com) (bepul kvota) yoki uy PC / VPS | Serverlessda sessiya uchun Redis kerak — quyida |
 
 **Botni $0 bilan ishga tushirish:**
 
@@ -31,20 +31,21 @@ Agar faqat **saytdan kelgan bronlar** Telegramga yetarli bo‘lsa, botni umuman 
 - `.env` repoga **kirmaydi** (`.gitignore`).
 - Namuna: `env.example` — nusxa olib `.env` qiling va qiymatlarni to‘ldiring.
 
-## Telegram bot
+## Telegram bot — ikki rejim
+
+**A) Mahalliy / VPS / Docker** — **long polling** (`npm start`). Redis kerak emas.
 
 ```bash
 npm install
 copy env.example .env
-```
-
-`.env` ichida `TELEGRAM_BOT_TOKEN` va `BOOKING_NOTIFY_CHAT_IDS` ni o‘rnating, keyin:
-
-```bash
 npm start
 ```
 
-(PowerShell da `copy`; macOS/Linux da `cp env.example .env`.)
+**B) Netlify** — **webhook** (`/.netlify/functions/telegram-bot`). **Polling bilan bir vaqtda ishlamaydi**: webhook yoqilgan bo‘lsa `npm start` ni to‘xtating.
+
+Redis va webhook bo‘yicha qadamlar pastda „Netlify“ bo‘limida.
+
+(PowerShell: `copy env.example .env`; Unix: `cp env.example .env`.)
 
 ## Render (ixtiyoriy, ko‘pincha pullik)
 
@@ -58,19 +59,49 @@ npm start
 
 **Bepul Web Service** uyqu rejimida uzilib qoladi — polling bot uchun mos emas.
 
-## Netlify: sahifa va veb bron bildirishnomalari
+## Netlify: sahifa, veb bron va suhbatli bot
 
-Landing **Netlify** da turganida «Bron qilish» bosilganda forma Telegramga (`booking-notify` serverless funktsiyasi orqali) xabar yuboradi — **shu bot token** va **shu admin chat ID** lar ishlatiladi.
+Saytni GitHub dan Netlify ga ulang ([`netlify.toml`](netlify.toml)).
 
-1. Saytni Netlify ga ulang ([`netlify.toml`](netlify.toml) loyiha ildizida).
-2. **Site settings → Environment variables** ga qo‘shing:
-   - `TELEGRAM_BOT_TOKEN` — BotFather token (Render dagi bilan bir xil bo‘lishi mumkin).
-   - `BOOKING_NOTIFY_CHAT_IDS` — bron xabarlarini oladigan chat ID lar (vergul bilan).
-3. Redeploy qiling.
+### Environment variables (Netlify Dashboard)
 
-Chat ID ni bilish: bot bilan `/start` yozgan odam uchun `@userinfobot` yoki bot kodida `console.log(ctx.chat.id)` (vaqtinchalik).
+| O‘zgaruvchi | Kerakmi | Izoh |
+|-------------|---------|------|
+| `TELEGRAM_BOT_TOKEN` | Ha | BotFather token |
+| `BOOKING_NOTIFY_CHAT_IDS` | Tavsiya | Admin chat ID lar (`booking-notify` va bot tasdiqlashi uchun) |
+| `UPSTASH_REDIS_REST_URL` | Bot uchun ha | [Upstash](https://upstash.com) dan Redis yarating → REST URL |
+| `UPSTASH_REDIS_REST_TOKEN` | Bot uchun ha | Upstash REST token |
+| `TELEGRAM_WEBHOOK_SECRET` | Tavsiya | Tasodifiy uzun qator (`openssl rand -hex 32`). Webhook firibgarligidan himoya |
 
-**Boshqa hosting** (faqat statik fayl): funktsiya ishlamaydi — `fetch` xatolikni yutadi va faqat eski kabi veb-bron sahifasi ochiladi. Funktsiya kerak bo‘lsa Netlify ishlating yoki alohida API yozing.
+Redeploy qiling har safar env o‘zgarganda.
+
+### 1) Veb forma → Telegram (`booking-notify`)
+
+«Bron qilish» tugmasi forma ma’lumotlarini Telegramga yuboradi — yuqoridagi `TELEGRAM_BOT_TOKEN` va `BOOKING_NOTIFY_CHAT_IDS` ishlatiladi.
+
+### 2) Suhbatli bot (`telegram-bot` funktsiyasi)
+
+Netlify serverlessda sessiya **Redis** da saqlanadi (oddiy RAM bilan ishlamaydi).
+
+**Webhook ni bir marta qo‘ying** (mahalliyda `.env` yoki vaqtinchalik env bilan):
+
+```bash
+WEBHOOK_URL=https://SIZNING-SAYT.netlify.app/.netlify/functions/telegram-bot npm run set-webhook
+```
+
+`TELEGRAM_WEBHOOK_SECRET` `.env` da bo‘lsa, Telegram ham xuddi shu maxfiy kalit bilan chaqiriladi.
+
+**Tekshirish:** `@BotFather` → `/setWebhook` emas — brauzerda `https://api.telegram.org/bot<TOKEN>/getWebhookInfo`
+
+### Mahalliy ishlab chiqish
+
+```bash
+npx netlify dev
+```
+
+Webhook URL production Netlify domeniga qarashi kerak — Telegram Internetdan chaqira oladigan HTTPS manzil.
+
+**Boshqa hosting** (faqat statik HTML): Netlify funktsiyalari ishlamaydi; forma `fetch` xatosini yutadi va faqat tashqi bron sahifasi ochiladi.
 
 ## Sahifani ochish
 

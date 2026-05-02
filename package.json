@@ -6,9 +6,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "node telegram_booking_bot.js"
+    "start": "node telegram_booking_bot.js",
+    "set-webhook": "node scripts/set-telegram-webhook.mjs"
   },
   "dependencies": {
+    "@upstash/redis": "^1.37.0",
     "dotenv": "^16.4.7",
     "telegraf": "^4.16.3"
   }
