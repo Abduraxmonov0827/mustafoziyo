@@ -40,22 +40,22 @@ Eslatma: Renderda **Worker** odatda **to‘lov rejasiga** kiradi (tekshiring: [r
 
 Brauzerda `al_arda_avenue_hotel_aos.html` ni oching yoki fayllarni har qanday static hostingga (GitHub Pages, Netlify va h.k.) yuklang.
 
-## GitHub ga yuklash (Git o‘rnatilgan bo‘lsa)
+## GitHub ga yuklash
 
-1. [Git for Windows](https://git-scm.com/download/win) yoki **GitHub Desktop** o‘rnating.
-2. [GitHub](https://github.com) da yangi **repository** yarating (masalan `al-arda-hotel`), README qo‘shmasdan ham bo‘ladi.
-3. Loyha papkasida:
+1. [GitHub](https://github.com) da yangi **repository** yarating (masalan `al-arda-hotel`). README / `.gitignore` qo‘shmang — lokalda commit bor.
+
+2. Loyha papkasida remote ulang va push qiling (`USERNAME` va `REPO` ni o‘zgartiring):
 
 ```powershell
 cd d:\mustafoziyo
-git init
-git add .
-git commit -m "Initial commit: landing and Telegram booking bot"
-git branch -M main
-git remote add origin https://github.com/SIZNING_USERNAME/SIZNING_REPO.git
+git remote add origin https://github.com/USERNAME/REPO.git
 git push -u origin main
 ```
 
-`SIZNING_USERNAME` va `SIZNING_REPO` ni o‘zgartiring. Birinchi marta GitHub HTTPS **Personal Access Token** yoki SSH kalit so‘raydi.
+Agar `remote add` „already exists“ desa: `git remote set-url origin https://github.com/USERNAME/REPO.git`
 
-**GitHub Desktop** da: *File → Add local repository* → `d:\mustafoziyo` tanlang, keyin *Publish repository*.
+Birinchi marta HTTPS da **Personal Access Token** yoki SSH kalit so‘raladi.
+
+**GitHub Desktop:** *Add local repository* → `d:\mustafoziyo` → *Publish repository*.
+
+**Yangi klonda** (commit yo‘q bo‘lsa): `git init`, `git add .`, `git commit -m "Initial commit"`, `git branch -M main`, keyin yuqoridagi `remote` va `push`.
