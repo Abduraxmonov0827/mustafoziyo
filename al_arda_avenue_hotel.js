@@ -1,6 +1,5 @@
 (function () {
-  const svg =
-    `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  const svg = `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
     <rect width="64" height="64" fill="#0D0D0D"/>
     <polygon points="32,4 60,32 32,60 4,32" fill="none" stroke="#C9A84C" stroke-width="2"/>
     <polygon points="32,12 52,32 32,52 12,32" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.4"/>
@@ -34,7 +33,8 @@ function applyLang(lang) {
   if (!window.HOTEL_I18N?.[lang]) lang = "uz";
   const pack = getPack(lang);
   localStorage.setItem(LANG_STORAGE, lang);
-  document.documentElement.lang = lang === "en" ? "en" : lang === "ru" ? "ru" : "uz";
+  document.documentElement.lang =
+    lang === "en" ? "en" : lang === "ru" ? "ru" : "uz";
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
@@ -46,7 +46,8 @@ function applyLang(lang) {
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
     const key = el.getAttribute("data-i18n-placeholder");
-    if (key != null && pack[key] != null) el.setAttribute("placeholder", pack[key]);
+    if (key != null && pack[key] != null)
+      el.setAttribute("placeholder", pack[key]);
   });
   document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
     const key = el.getAttribute("data-i18n-alt");
@@ -54,7 +55,8 @@ function applyLang(lang) {
   });
   document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
     const key = el.getAttribute("data-i18n-aria");
-    if (key != null && pack[key] != null) el.setAttribute("aria-label", pack[key]);
+    if (key != null && pack[key] != null)
+      el.setAttribute("aria-label", pack[key]);
   });
   document.querySelectorAll("[data-i18n-title]").forEach((el) => {
     const key = el.getAttribute("data-i18n-title");
@@ -99,7 +101,9 @@ function setNavOpen(open) {
   document.body.style.overflow = open ? "hidden" : "";
 }
 
-navToggle?.addEventListener("click", () => setNavOpen(!nav.classList.contains("nav-open")));
+navToggle?.addEventListener("click", () =>
+  setNavOpen(!nav.classList.contains("nav-open")),
+);
 
 navLinks?.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => setNavOpen(false));
@@ -161,7 +165,10 @@ const bkRoom = document.getElementById("bk-room");
 const bkPromo = document.getElementById("bk-promo");
 
 (() => {
-  const isoToday = new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  const isoToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    .toISOString()
+    .slice(0, 10);
   if (bkCheckin) bkCheckin.min = isoToday;
   if (bkCheckout) bkCheckout.min = isoToday;
 })();
@@ -169,7 +176,8 @@ const bkPromo = document.getElementById("bk-promo");
 bkCheckin?.addEventListener("change", () => {
   if (!bkCheckout || !bkCheckin.value) return;
   bkCheckout.min = bkCheckin.value;
-  if (bkCheckout.value && bkCheckout.value <= bkCheckin.value) bkCheckout.value = "";
+  if (bkCheckout.value && bkCheckout.value <= bkCheckin.value)
+    bkCheckout.value = "";
 });
 
 function bookingNotifyUrl() {
@@ -198,39 +206,68 @@ async function sendBookingNotify(payload) {
   }
 }
 
-document.querySelector(".booking-submit")?.addEventListener("click", async () => {
-  const checkin = bkCheckin?.value ?? "";
-  const checkout = bkCheckout?.value ?? "";
-  if (checkin && checkout && checkout <= checkin) {
-    const lang = localStorage.getItem(LANG_STORAGE) || "uz";
-    window.alert(getPack(lang)["bk.alert"] || "");
-    bkCheckout.focus();
-    return;
-  }
+document
+  .querySelector(".booking-submit")
+  ?.addEventListener("click", async (e) => {
+    const submitBtn = e.currentTarget;
+    if (!(submitBtn instanceof HTMLButtonElement)) return;
+    if (submitBtn.disabled) return;
 
-  const guests = bkGuests?.value?.trim() ?? "";
-  const room = bkRoom?.value ?? "";
-  const sel = bkRoom?.selectedOptions?.[0];
-  const roomLabel = sel?.textContent?.trim() ?? "";
+    const checkin = bkCheckin?.value ?? "";
+    const checkout = bkCheckout?.value ?? "";
+    if (checkin && checkout && checkout <= checkin) {
+      const lang = localStorage.getItem(LANG_STORAGE) || "uz";
+      window.alert(getPack(lang)["bk.alert"] || "");
+      bkCheckout.focus();
+      return;
+    }
 
-  await sendBookingNotify({
-    check_in: checkin || null,
-    check_out: checkout || null,
-    guests: guests || null,
-    room_type: room || null,
-    room_label: roomLabel || null,
-    promo: (bkPromo?.value ?? "").trim() || null,
-    source: "website",
+    const guests = bkGuests?.value?.trim() ?? "";
+    if (guests) {
+      const n = Number(guests);
+      if (!Number.isFinite(n) || !Number.isInteger(n) || n < 1 || n > 20) {
+        window.alert("Mehmonlar soni 1 dan 20 gacha bo‘lishi kerak.");
+        bkGuests?.focus();
+        return;
+      }
+    }
+
+    const room = bkRoom?.value ?? "";
+    const sel = bkRoom?.selectedOptions?.[0];
+    const roomLabel = sel?.textContent?.trim() ?? "";
+
+    const params = new URLSearchParams();
+    if (checkin) params.set("check_in", checkin);
+    if (checkout) params.set("check_out", checkout);
+    if (guests) params.set("guests", guests);
+    if (room) params.set("room_type", room);
+    const promo = bkPromo?.value?.trim();
+    if (promo) params.set("promo", promo);
+
+    const qs = params.toString();
+    const targetUrl = qs ? `${BOOKING_SITE}?${qs}` : BOOKING_SITE;
+
+    submitBtn.disabled = true;
+    const bookingTab = window.open("about:blank", "_blank", "noopener");
+
+    try {
+      await sendBookingNotify({
+        check_in: checkin || null,
+        check_out: checkout || null,
+        guests: guests || null,
+        room_type: room || null,
+        room_label: roomLabel || null,
+        promo: promo || null,
+        source: "website",
+      });
+    } finally {
+      submitBtn.disabled = false;
+    }
+
+    if (bookingTab) {
+      bookingTab.location.href = targetUrl;
+      return;
+    }
+
+    window.location.assign(targetUrl);
   });
-
-  const params = new URLSearchParams();
-  if (checkin) params.set("check_in", checkin);
-  if (checkout) params.set("check_out", checkout);
-  if (guests) params.set("guests", guests);
-  if (room) params.set("room_type", room);
-  const promo = bkPromo?.value?.trim();
-  if (promo) params.set("promo", promo);
-
-  const qs = params.toString();
-  window.open(qs ? `${BOOKING_SITE}?${qs}` : BOOKING_SITE, "_blank");
-});
